@@ -18,10 +18,10 @@ mongo = PyMongo(app)
 
 
 @app.route("/")
-@app.route("/get_tasks")
-def get_tasks():
+@app.route("/get_reviews")
+def get_reviews():
     tasks = mongo.db.tasks.find()
-    return render_template("tasks.html", tasks = tasks)
+    return render_template("reviews.html", tasks = tasks)
 
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
