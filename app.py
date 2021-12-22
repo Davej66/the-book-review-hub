@@ -22,7 +22,7 @@ mongo = PyMongo(app)
 @app.route("/get_reviews")
 def get_reviews():
     tasks = mongo.db.tasks.find()
-    return render_template("reviews.html", tasks = tasks)
+    return render_template("reviews.html", tasks=tasks)
 
 
 
