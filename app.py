@@ -122,7 +122,7 @@ def add_review():
 @app.route("/edit_review/<review_id>", methods=["GET", "POST"])
 def edit_review(review_id):
     review = mongo.db.reviews.find_one({"_id": ObjectId(review_id)})
-    genres = mongo.db.genres.find().sort("genre_name", 1)
+    genres = mongo.db.genre.find().sort("genre_name", 1)
     return render_template("edit_review.html", review=review, genres=genres)
     
 

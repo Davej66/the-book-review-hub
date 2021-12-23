@@ -9,21 +9,27 @@
         <div class="row">
             <div class="input-field col s12">
                 <i class="fas fa-folder-open prefix light-blue-text text-darken-4"></i>
-                <select id="genre_name name=" name="genre_name" class="validate" required>
-                    <option value="" disabled selected>Choose Genre</option>
+                <select id="genre_name" name="genre_name" class="validate" required>
+                    <option value="" disabled></option>
                     {% for genre in genres %}
-                            <option value="{{ genre.genre_name }}">{{ genre.genre_name }}</option>
+                        {% if genre.genre_name == review.genre_name %}
+                            <option value="{{ genre.genre_name }}" selected>{{ genre.genre_name }}</option>
+                        {% else %}
+                            <option value="{{ genre.genre_name }}" >{{ genre.genre_name }}</option>
+                        {% endif %}
                     {% endfor %}
-                </select>
-                <label>Book Genre</label>
-              </div>
-        </div>
+                    </select>
+					<label for="genre_name">Genre</label>
+				</div>
+			</div>
+           
+
         <!-- Book name -->
         <div class="row">
             <div class="input-field col s12">
                 <i class="fas fa-align-left prefix light-blue-text text-darken-4"></i>
                 <input id="review_name" name="review_name" minlength="5" maxlength="50"
-                    type="text" class="validate" required>
+                    value="{{ review.review_name }}" type="text" class="validate" required>
                 <label for="review_name">Book Name</label>
             </div>
         </div>
@@ -32,7 +38,9 @@
             <div class="input-field col s12">
                 <i class="fas fa-pencil-alt prefix light-blue-text text-darken-4"></i>
                 <textarea id="review_description" name="review_description" minlength="5"
-                    maxlength="500" class="materialize-textarea validate" required></textarea>
+                    maxlength="500"  class="materialize-textarea validate" required>
+                    {{- review.review_description -}}
+                </textarea>
                 <label for="review_description">Review</label>
             </div>
         </div>
@@ -40,8 +48,11 @@
         <div class="row">
             <div class="input-field col s12">
                 <i class="fas fa-pencil-alt prefix light-blue-text text-darken-4"></i>
-                <textarea id="review_rating" name="review_rating" minlength="5"
-                    maxlength="500" class="materialize-textarea validate" required></textarea>
+                <textarea id="review_rating" name="review_rating" minlength="1"
+                    maxlength="1" class="materialize-textarea validate" required>
+                    {{- review.review_rating -}}
+                </textarea>
+                   
                 <label for="review_rating">Book Rating</label>
             </div>
         </div>
@@ -50,13 +61,19 @@
             <div class="input-field col s12">
                 <i class="fas fa-pencil-alt prefix light-blue-text text-darken-4"></i>
                 <textarea id="book_cover" name="book_cover" minlength="5"
-                    maxlength="500" class="materialize-textarea validate" required></textarea>
+                    maxlength="500" class="materialize-textarea validate" required>
+                    {{- review.book_cover -}}
+                </textarea>
                 <label for="book_cover">Book Cover Image</label>
             </div>
         </div>
         <!-- submit button -->
         <div class="row">
             <div class="col s12 center-align">
+                <!-- cancel button -->
+                <a href="{{ url_for('get_reviews') }}" class="btn-large red text-shadow">
+                    Cancel <i class="fas fa-times-circle right"></i>
+                </a>
                 <button type="submit" class="btn-large light-blue darken-1 text-shadow">
                     Edit Review <i class="fas fa-edit right"></i>
                 </button>
